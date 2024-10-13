@@ -32,14 +32,12 @@ class Solution {
   public:
     void deleteAlt(struct Node *head) {
         // Code here
-        if(head == NULL) return;
-        Node *temp =head;
-        while (temp != NULL && temp->next != NULL) {
-            Node* nodeToDelete = temp->next;
+        Node *temp = head;
+        while(temp != NULL && temp->next != NULL)
+        {
             temp->next = temp->next->next;
-            delete nodeToDelete;  // Free the memory of the deleted node
             temp = temp->next;
-         }
+        }
     }
 };
 
