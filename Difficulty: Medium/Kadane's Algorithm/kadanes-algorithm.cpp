@@ -11,7 +11,7 @@ class Solution {
     // Function to find the sum of contiguous subarray with maximum sum.
     int maxSubarraySum(vector<int> &arr) {
         // code here...
-        int prefix = 0, maxi = INT_MIN, n = arr.size();
+         int prefix = 0, maxi = INT_MIN, n = arr.size();
         
         for(int i=0;i<n;i++)
         {
