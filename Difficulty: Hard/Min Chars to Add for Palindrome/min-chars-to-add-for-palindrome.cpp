@@ -1,14 +1,15 @@
 //{ Driver Code Starts
 /* Driver program to test above function */
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
+
 
 // } Driver Code Ends
 class Solution {
-public:
-    int minChar(string str){
-        //Write your code here
+  public:
+    int minChar(string& str) {
+        // Write your code here
         string rev=str;
         reverse(rev.begin(),rev.end());
         int size=str.size(); //original size
@@ -40,19 +41,20 @@ public:
 
 
 //{ Driver Code Starts.
-int main()
-{
-	int t;
-	cin>>t;
-	while(t--)
-	{
-	    string str;
-	    cin >> str;
-	    Solution ob;
-	    int ans = ob.minChar(str);
-	    cout << ans<<endl;
-	}
-	return 0;
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        string str;
+        cin >> str;
+        Solution ob;
+        int ans = ob.minChar(str);
+        cout << ans << endl;
+
+        cout << "~"
+             << "\n";
+    }
+    return 0;
 }
 
 // } Driver Code Ends
