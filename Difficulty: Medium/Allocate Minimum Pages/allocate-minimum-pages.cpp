@@ -1,21 +1,17 @@
 //{ Driver Code Starts
-// Initial template for C++
+// Initial function template for C++
 
 #include <bits/stdc++.h>
 using namespace std;
 
 
 // } Driver Code Ends
-// User function template in C++
-
-// User function template in C++
-
 class Solution {
   public:
-    // Function to find minimum number of pages.
-    long long findPages(int n, int arr[], int m) {
+    int findPages(vector<int> &arr, int k) {
         // code here
-        if(m > n) return -1;
+        int n = arr.size();
+        if(k > n) return -1;
         int sta = 0;
         long long end, mid, ans;
         for(int i = 0; i < n; i++)
@@ -37,7 +33,7 @@ class Solution {
                     pages = arr[i];
                 }
             }
-            if(count <= m)
+            if(count <= k)
             {
                 ans = mid;
                 end = mid - 1;
@@ -52,21 +48,35 @@ class Solution {
 //{ Driver Code Starts.
 
 int main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        int A[n];
-        for (int i = 0; i < n; i++) {
-            cin >> A[i];
+    int test_case;
+    cin >> test_case;
+    cin.ignore();
+    while (test_case--) {
+
+        int d;
+        vector<int> arr, brr, crr;
+        string input;
+        getline(cin, input);
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            arr.push_back(number);
         }
-        int m;
-        cin >> m;
+        getline(cin, input);
+        ss.clear();
+        ss.str(input);
+        while (ss >> number) {
+            crr.push_back(number);
+        }
+        d = crr[0];
+        int n = arr.size();
         Solution ob;
-        cout << ob.findPages(n, A, m) << endl;
+        int ans = ob.findPages(arr, d);
+        cout << ans << endl;
+
+        cout << "~"
+             << "\n";
     }
     return 0;
 }
-
 // } Driver Code Ends
