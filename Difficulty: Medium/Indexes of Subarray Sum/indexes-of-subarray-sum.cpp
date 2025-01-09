@@ -9,29 +9,35 @@ class Solution {
     vector<int> subarraySum(vector<int> &arr, int target) {
         // code here
         int n=arr.size();
-        vector<int>pre(n,0);
-        pre[0]=arr[0];
-        for(int i=1;i<n;++i)
-            pre[i]=pre[i-1]+arr[i];
-        int l=0,r=0,sum=0;
-        while(l<n && r<n)
+        // vector<int>pre(n,0);
+        // pre[0]=arr[0];
+        // for(int i=1;i<n;++i)
+        //     pre[i]=pre[i-1]+arr[i];
+        // int l=0,r=0,sum=0;
+        // while(l<n && r<n)
+        // {
+        //     sum=pre[r]-(l>0?pre[l-1]:0);
+            
+        //     if(pre[r]==target || sum==target)
+        //         return {l+1,r+1};
+            
+        //     if(sum<target)
+        //         r++;
+        //     else if(sum>target)
+        //         l++;
+        // }
+        int j = 0, sum = 0;
+        for(int i = 0; i < n; i++)
         {
-            sum=pre[r]-(l>0?pre[l-1]:0);
+            sum += arr[i];
             
-            if(pre[r]==target || sum==target)
-                return {l+1,r+1};
+            while(sum > target && j <= i)
+            {
+                sum -= arr[j];
+                j++;
+            }
             
-            if(sum<target)
-                r++;
-            else if(sum>target)
-                l++;
-            
-            
-            
-            //sum+=arr[r];
-                
-            
-            //cout<<sum<<" {"<<l<<" "<<r<<"}"<<"\n";
+            if(sum == target) return {j + 1, i + 1};
         }
         return {-1};
     }
