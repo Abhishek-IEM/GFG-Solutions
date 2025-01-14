@@ -8,22 +8,22 @@ using namespace std;
 class Solution {
   public:
     // Function to find equilibrium point in the array.
-    // arr: input array
-    int equilibriumPoint(vector<long long> &arr) {
-        // Your code here
-        int totalSum = 0, leftSum = 0, rightSum = 0;
+    int findEquilibrium(vector<int> &arr) {
+        // code here
         int n = arr.size();
+        int totalSum = 0, leftSum = 0, rightSum = 0;
+        
+        for(int i = 0; i < n; i++) totalSum += arr[i];
+        
         for(int i = 0; i < n; i++)
         {
-            totalSum += arr[i];
-        }
-        for(int i = 0; i < n; i++)
-        {
-            if(leftSum == (totalSum - leftSum - arr[i])) return i + 1;
-            else leftSum += arr[i];
+            rightSum = totalSum -leftSum - arr[i];
+            
+            if(rightSum == leftSum) return i;
+            
+            leftSum += arr[i];
         }
         return -1;
-
     }
 };
 
@@ -35,7 +35,7 @@ int main() {
     cin.ignore(); // To discard any leftover newline characters
     while (t--)   // while testcases exist
     {
-        vector<long long> arr;
+        vector<int> arr;
         string input;
         getline(cin, input); // Read the entire line for the array elements
         stringstream ss(input);
@@ -45,7 +45,8 @@ int main() {
         }
 
         Solution ob;
-        cout << ob.equilibriumPoint(arr) << endl;
+        cout << ob.findEquilibrium(arr) << endl;
+        cout << "~" << endl;
     }
 }
 // } Driver Code Ends
