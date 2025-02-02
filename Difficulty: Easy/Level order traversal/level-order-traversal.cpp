@@ -48,22 +48,25 @@ class Solution {
     vector<vector<int>> levelOrder(Node *root) {
         // code here
         vector<vector<int>> ans;
+        if (!root) return ans;
         queue<Node*> q;
         q.push(root);
-        Node* temp;
-        vector<int> v;
-        while(!q.empty())
-        {
-            temp = q.front();
-            q.pop();
-            v.push_back(temp->data);
-            if(temp->left) q.push(temp->left);
-            if(temp->right) q.push(temp->right);
+        while (!q.empty()) {
+            int levelSize = q.size();
+            vector<int> v;
+            for (int i = 0; i < levelSize; i++) {
+                Node* temp = q.front();
+                q.pop();
+                v.push_back(temp->data);
+                if (temp->left) q.push(temp->left);
+                if (temp->right) q.push(temp->right);
+            }
+            ans.push_back(v);
         }
-        ans.push_back(v);
         return ans;
     }
 };
+
 
 //{ Driver Code Starts.
 
