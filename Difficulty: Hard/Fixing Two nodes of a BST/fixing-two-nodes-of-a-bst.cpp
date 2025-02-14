@@ -4,19 +4,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Node
-{
+class Node {
+  public:
     int data;
     Node *left, *right;
-    Node(int val)
-    {
+
+    Node(int val) {
         data = val;
         left = right = NULL;
     }
 };
 
-Node* buildTree(string str)
-{
+Node* buildTree(string str) {
     // Corner Case
     if (str.length() == 0 || str[0] == 'N')
         return NULL;
@@ -26,7 +25,7 @@ Node* buildTree(string str)
     vector<string> ip;
 
     istringstream iss(str);
-    for (string str; iss >> str; )
+    for (string str; iss >> str;)
         ip.push_back(str);
 
     // Create the root of the tree
@@ -78,29 +77,33 @@ Node* buildTree(string str)
     return root;
 }
 
-bool isBST(Node* n, int lower, int upper)
-{
-    if (!n) return true;
-    if ( n->data <= lower || n->data >= upper ) return false;
-    return (  isBST( n->left, lower, n->data )  &&  isBST( n->right, n->data, upper )  );
+bool isBST(Node* n, int lower, int upper) {
+    if (!n)
+        return true;
+    if (n->data <= lower || n->data >= upper)
+        return false;
+    return (isBST(n->left, lower, n->data) && isBST(n->right, n->data, upper));
 }
 
-bool compare( Node* a, Node* b, vector<pair<int, int>> &mismatch )
-{
-    if ( !a && !b ) return true;
-    if ( !a || !b ) return false;
+bool compare(Node* a, Node* b, vector<pair<int, int>>& mismatch) {
+    if (!a && !b)
+        return true;
+    if (!a || !b)
+        return false;
 
-    if ( a->data != b->data )
-        mismatch.push_back( pair<int, int> (a->data, b->data) );
+    if (a->data != b->data)
+        mismatch.push_back(pair<int, int>(a->data, b->data));
 
-    return ( compare( a->left, b->left, mismatch ) && compare( a->right, b->right, mismatch ) );
+    return (compare(a->left, b->left, mismatch) &&
+            compare(a->right, b->right, mismatch));
 }
 
 
 // } Driver Code Ends
 /*
-struct Node
+class Node
 {
+    public:
     int data;
     Node *left, *right;
     Node(int val)
@@ -113,68 +116,37 @@ struct Node
 
 class Solution {
   public:
-    void correctBST( struct Node* root )
+    Node *first = NULL, *second = NULL, *prev = nullptr;
+    void inorder(Node *root)
     {
-        // add code here.
-        Node *curr = NULL;
-        Node *first = NULL, *second = NULL;
-        Node *last = NULL, *present = NULL;
+        if(!root) return;
+        inorder(root->left);
         
-        while(root)
-        {
-            if(!root->left)
-            {
-                last = present;
-                present = root;
-                
-                if(last && last->data > present->data)
-                {
-                    if(!first) first = last;
-                    second = present;
-                }
-                root = root->right;
-            }
-            else{
-                curr = root->left;
-                while(curr->right && curr->right != root) curr = curr->right;
-                
-                if(!curr->right)
-                {
-                    curr->right = root;
-                    root = root->left;
-                }
-                else
-                {
-                    curr->right = NULL;
-                    last = present;
-                    present = root;
-                    
-                    if(last && last->data > present->data)
-                    {
-                        if(!first) first = last;
-                        second = present;
-                    }
-                    root = root->right;
-                }
-            } 
+        if(prev && root->data < prev->data){
+            if(!first) first = prev;
+            second = root;
         }
-        int num =first->data;
-        first->data = second->data;
-        second->data = num;
+        
+        prev = root;
+        inorder(root->right);
+    }
+    
+    void correctBST(Node* root) {
+        // add code here.
+        inorder(root);
+        if(first && second) swap(first->data, second->data);
     }
 };
 
 
 //{ Driver Code Starts.
 
-int main()
-{
+int main() {
     int t;
     cin >> t;
     getchar();
 
-    while (t--)
-    {
+    while (t--) {
         string s;
         getline(cin, s);
 
@@ -185,8 +157,7 @@ int main()
         ob.correctBST(root);
 
         // check 1: is tree now a BST
-        if ( ! isBST(root, INT_MIN, INT_MAX) )
-        {
+        if (!isBST(root, INT_MIN, INT_MAX)) {
             cout << "0\n";
             continue;
         }
@@ -196,20 +167,22 @@ int main()
         vector<pair<int, int>> mismatch;
         // a vector to store data of mismatching nodes
 
-        if ( ! compare( root, duplicate, mismatch) )
-        {
+        if (!compare(root, duplicate, mismatch)) {
             // false output from this function indicates change in structure of tree
             cout << "0\n";
             continue;
         }
 
         // finally, analysing the mismatching nodes
-        if ( mismatch.size() != 2 || mismatch[0].first != mismatch[1].second || mismatch[0].second != mismatch[1].first )
+        if (mismatch.size() != 2 || mismatch[0].first != mismatch[1].second ||
+            mismatch[0].second != mismatch[1].first)
             cout << "0\n";
-        else cout << "1\n";
-    
-cout << "~" << "\n";
-}
+        else
+            cout << "1\n";
+
+        cout << "~"
+             << "\n";
+    }
     return 0;
 }
 
