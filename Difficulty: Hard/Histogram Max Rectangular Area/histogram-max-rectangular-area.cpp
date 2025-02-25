@@ -1,16 +1,17 @@
 //{ Driver Code Starts
+// Initial Template for C++
+
 #include <bits/stdc++.h>
 using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
-    // Function to find largest rectangular area possible in a given histogram.
-    long long getMaxArea(vector<long long> &arr) {
+    int getMaxArea(vector<int> &arr) {
         // Your code here
-        long long area = 0;
-        long long n = arr.size();
+        int n = arr.size(), area = 0;
         
         stack<int> st;
         
@@ -28,6 +29,7 @@ class Solution {
             }
             st.push(i);
         }
+        
         while(!st.empty())
         {
             right[st.top()] = n;
@@ -45,35 +47,45 @@ class Solution {
             }
             st.push(i);
         }
+        
         while(!st.empty())
         {
             left[st.top()] = -1;
             st.pop();
         }
+        
         for(int i=0;i<n;i++)
         {
             area = max(area, arr[i] * (right[i] - left[i] - 1));
         }
+        
         return area;
     }
 };
 
 
+
 //{ Driver Code Starts.
 
 int main() {
-    long long t;
-
-    cin >> t;
+    string ts;
+    getline(cin, ts);
+    int t = stoi(ts);
     while (t--) {
-        int n;
-        cin >> n;
-
-        vector<long long> arr(n);
-        for (int i = 0; i < n; i++)
-            cin >> arr[i];
-        Solution ob;
-        cout << ob.getMaxArea(arr) << endl;
+        vector<int> arr;
+        string input;
+        getline(cin, input);
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            arr.push_back(number);
+        }
+        Solution obj;
+        int res = obj.getMaxArea(arr);
+        cout << res << endl;
+        cout << "~" << endl;
+        // string tl;
+        // getline(cin, tl);
     }
     return 0;
 }
