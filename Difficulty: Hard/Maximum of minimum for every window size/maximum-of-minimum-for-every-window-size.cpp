@@ -6,14 +6,12 @@ using namespace std;
 // } Driver Code Ends
 
 
-class Solution
-{
-    public:
-    //Function to find maximum of minimums of every window size.
-    vector <int> maxOfMin(int arr[], int n)
-    {
+class Solution {
+  public:
+    vector<int> maxOfMins(vector<int>& arr) {
+        int n= arr.size();
         // Your code here
-        vector<int>ans(n, 0);
+         vector<int>ans(n, 0);
         stack<int> st;
         for(int i=0;i<n;i++)
         {
@@ -58,20 +56,27 @@ class Solution
     }
 };
 
+
 //{ Driver Code Starts.
 int main() {
     int t;
     cin >> t;
-
+    cin.ignore();
     while (t--) {
-        int n;
-        cin >> n;
-        int a[n];
-        for (int i = 0; i < n; i++) cin >> a[i];
+        string line;
+        getline(cin, line);
+        stringstream ss(line);
+        vector<int> arr;
+        int num;
+        while (ss >> num) {
+            arr.push_back(num);
+        }
         Solution ob;
-        vector <int> res = ob.maxOfMin(a, n);
-        for (int i : res) cout << i << " ";
+        vector<int> res = ob.maxOfMins(arr);
+        for (int i : res)
+            cout << i << " ";
         cout << endl;
+        cout << "~\n";
     }
     return 0;
 }
