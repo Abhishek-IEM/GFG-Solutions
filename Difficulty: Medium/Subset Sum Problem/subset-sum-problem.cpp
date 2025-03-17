@@ -6,28 +6,26 @@ using namespace std;
 
 // } Driver Code Ends
 
-// User function template for C++
-
 class Solution {
   public:
-    bool solve(vector<int>& arr, int target, int i, vector<vector<int>>& dp)
+    bool solve(vector<int>& arr, int sum, int i, vector<vector<int>> &dp)
     {
-        if(target == 0) return 1;
-        if(target < 0 || i == arr.size()) return 0;
+        if(sum == 0) return 1;
+        if(sum < 0 || i == arr.size()) return 0;
         
-        if(dp[i][target] != -1) return dp[i][target];
+        if(dp[i][sum] != -1) return dp[i][sum];
         
-        bool pick = solve(arr, target - arr[i], i + 1, dp);
-        bool nopick = solve(arr, target, i + 1, dp);
+        int take = solve(arr, sum - arr[i], i + 1, dp);
+        int notake = solve(arr, sum, i + 1, dp);
         
-        return dp[i][target] = pick || nopick;
+        return dp[i][sum] = take || notake;
     }
     
-    bool isSubsetSum(vector<int>& arr, int target) {
+    bool isSubsetSum(vector<int>& arr, int sum) {
         // code here
         int n = arr.size();
-        vector<vector<int>> dp(n, vector<int>(target + 1, -1));
-        return solve(arr, target, 0, dp);
+        vector<vector<int>> dp(n + 1, vector<int> (sum + 1, -1));
+        return solve(arr, sum, 0, dp);
     }
 };
 
