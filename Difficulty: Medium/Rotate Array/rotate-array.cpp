@@ -6,27 +6,21 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
-   void reverse(vector<int> &arr, int i, int j)
-    {
-        while(i<=j)
-        {
-            swap(arr[i],arr[j]);
-            i++;
-            j--;
-        }
-    }
+
     // Function to rotate an array by d elements in counter-clockwise direction.
     void rotateArr(vector<int>& arr, int d) {
         // code here
         int n = arr.size();
-        if(d>n) d = d%n;
-        reverse(arr,0,d-1);
-        reverse(arr, d, n - 1);
-        reverse(arr, 0, n - 1);
+        d = d % n;
+        reverse(arr.begin(), arr.begin() + d);
+        reverse(arr.begin() + d, arr.end());
+        reverse(arr.begin(), arr.end());
     }
 };
+
 
 //{ Driver Code Starts.
 
