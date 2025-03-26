@@ -7,7 +7,8 @@ using namespace std;
 
 class Solution {
   public:
-    bool solve(string &s, set<string> &st, int i, vector<int> &dp)
+  
+   bool solve(string &s, set<string> &st, int i, vector<int> &dp)
     {
         if(i == s.size()) return 1;
         
