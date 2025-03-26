@@ -4,19 +4,26 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
     int maximumProfit(vector<int> &prices) {
-    int n = prices.size();
-    if (n < 2) return 0;
-    int minPrice = prices[0], profit = 0;
-    for (int i = 1; i < n; i++) {
-        profit = max(profit, prices[i] - minPrice);
-        minPrice = min(minPrice, prices[i]);
+        // code here
+        int minPrice = INT_MAX;  
+        int maxProfit = 0;       
+    
+        for (int price : prices) {
+            if (price < minPrice) {
+                minPrice = price;
+            } else {
+                maxProfit = max(maxProfit, price - minPrice); 
+            }
+        }
+    
+        return maxProfit;
     }
-    return profit;
-}
 };
+
 
 
 //{ Driver Code Starts.
