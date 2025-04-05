@@ -2,57 +2,54 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
 // } Driver Code Ends
+
 class Solution {
   public:
-    // Function to find the number of islands.
-    int row[8] = {-1, -1, -1, 1, 1, 1, 0, 0}; 
-    int col[8] = {-1, 0, 1, -1, 0, 1, -1, 1}; 
-    int r;
-    int c;
-    
-    bool valid(int i, int j)
+    vector<vector<int>> dir{{1,0},{-1,0},{0,-1},{0,1},{1,1},{-1,-1},{1,-1},{-1,1}};
+     
+    bool isValid(int i, int j, int n, int m)
     {
-        return i >= 0 && i < r && j >= 0 && j < c;
+        return i >=0 && i < n && j >= 0 && j < m;
     }
-    int numIslands(vector<vector<char>>& grid) {
+    
+    int countIslands(vector<vector<char>>& grid) {
         // Code here
-        r = grid.size();
-        c = grid[0].size();
+        int n = grid.size(), m = grid[0].size(), ans = 0;
         
-        queue<pair<int, int> > q;
+        queue<pair<int, int>> q;
         
-        int count = 0;
-        
-        for(int i = 0; i < r; i++)
+        for(int i = 0; i < n; i++)
         {
-            for(int j = 0; j < c; j++)
+            for(int j = 0; j < m; j++)
             {
-                if(grid[i][j] == '1')
+                if(grid[i][j] == 'L')
                 {
-                    count++;
-                    q.push(make_pair(i, j));
-                    grid[i][j] = 0;
+                    q.push({i, j});
+                    ans++;
+                    grid[i][j] = 'W';
                     
-                    while(!q.empty())
-                    {
-                        int new_i = q.front().first;
-                        int new_j = q.front().second;
-                        q.pop();
-                        
-                        for(int k = 0; k < 8; k++)
+                   while(!q.empty())
+                   {
+                      int x = q.front().first;
+                      int y = q.front().second;
+                      q.pop();
+                       
+                        for(int i = 0; i < 8; i++)
                         {
-                            if(valid(new_i + row[k], new_j + col[k]) && grid[new_i + row[k]][new_j + col[k]] == '1')
+                            int new_i = x + dir[i][0], new_j = y + dir[i][1];
+                            if(isValid(new_i, new_j, n, m) && grid[new_i][new_j] == 'L')
                             {
-                                grid[new_i + row[k]][new_j + col[k]] = '0';
-                                q.push(make_pair(new_i + row[k],new_j + col[k]));
+                                q.push({new_i, new_j});
+                                grid[new_i][new_j] = 'W';
                             }
                         }
-                    }
+                   }
                 }
             }
         }
-        return count;
+        return ans;
     }
 };
 
@@ -71,8 +68,11 @@ int main() {
             }
         }
         Solution obj;
-        int ans = obj.numIslands(grid);
+        int ans = obj.countIslands(grid);
         cout << ans << '\n';
+
+        cout << "~"
+             << "\n";
     }
     return 0;
 }
