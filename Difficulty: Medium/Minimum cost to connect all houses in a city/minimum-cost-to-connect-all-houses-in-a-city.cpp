@@ -21,6 +21,7 @@ class Solution {
         for (int i = 0; i < n; ++i) {
             int u = -1;
     
+            // Pick the unvisited node with the minimum cost
             for (int j = 0; j < n; ++j) {
                 if (!visited[j] && (u == -1 || minDist[j] < minDist[u])) {
                     u = j;
@@ -30,6 +31,7 @@ class Solution {
             visited[u] = true;
             cost += minDist[u];
     
+            // Update the cost to connect the remaining unvisited nodes
             for (int v = 0; v < n; ++v) {
                 if (!visited[v]) {
                     int dist = abs(houses[u][0] - houses[v][0]) + abs(houses[u][1] - houses[v][1]);
