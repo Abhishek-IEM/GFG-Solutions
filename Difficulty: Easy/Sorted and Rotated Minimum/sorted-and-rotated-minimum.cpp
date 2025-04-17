@@ -4,18 +4,27 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
     int findMin(vector<int>& arr) {
         // complete the function here
-        int n = arr.size();
-        int mini=arr[0];
-        for(int i=0;i<n;i++){
-            mini=min(arr[i],mini);
+        int low = 0, high = arr.size() - 1;
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+    
+            if (arr[mid] < arr[high]) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
         }
-        return mini;
+    
+        return arr[low];
     }
 };
+
 
 //{ Driver Code Starts.
 
