@@ -5,20 +5,32 @@ using namespace std;
 
 // } Driver Code Ends
 
+
 class Solution {
   public:
     int peakElement(vector<int> &arr) {
         // Your code here
-       int n = arr.size(), start=0,end=n-1,mid;
-       while(start<end)
-       {
-           mid = start + (end-start)/2;
-           if(arr[mid] < arr[mid + 1]) start = mid + 1;
-           else end = mid;
-       }
-       return start;
+        int n = arr.size();
+        int low = 0, high = n - 1;
+    
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+    
+            bool leftOK = (mid == 0) || (arr[mid] >= arr[mid - 1]);
+            bool rightOK = (mid == n - 1) || (arr[mid] >= arr[mid + 1]);
+    
+            if (leftOK && rightOK) {
+                return mid;
+            } else if (mid > 0 && arr[mid - 1] > arr[mid]) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return -1;
     }
 };
+
 
 //{ Driver Code Starts.
 
