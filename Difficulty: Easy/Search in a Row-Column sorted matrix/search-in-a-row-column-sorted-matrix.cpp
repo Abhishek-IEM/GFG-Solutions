@@ -4,22 +4,24 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 // User function template for C++
 class Solution {
   public:
     bool matSearch(vector<vector<int>> &mat, int x) {
         // your code here
-        int n = mat.size(), m = mat[0].size();
-        int row = 0, col = m - 1;
-        while(row < n && col >= 0)
-        {
-            if(mat[row][col] == x) return true;
-            else if(mat[row][col] > x) col--;
-            else row++;
+        int n=mat.size();
+        int m=mat[0].size();
+        int i=0,j=m-1;
+        while(i<n && j>=0){
+            if(mat[i][j]==x) return true;
+            if(mat[i][j]>x) j--;
+            else i++;
         }
         return false;
     }
 };
+
 
 //{ Driver Code Starts.
 int main() {
