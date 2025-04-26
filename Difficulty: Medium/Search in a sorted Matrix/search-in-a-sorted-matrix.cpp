@@ -6,27 +6,24 @@ using namespace std;
 // } Driver Code Ends
 
 
+
 class Solution {
   public:
     // Function to search a given number in row-column sorted matrix.
     bool searchMatrix(vector<vector<int>> &mat, int x) {
         // code here
-        int n = mat.size(), m = mat[0].size();
-        int left = 0, right = n * m - 1;
-        
-        while(left <= right)
-        {
-            int mid = left + (right - left)/2;
-            
-            int row = mid / m, col = mid % m;
-            
-            if(mat[row][col] == x) return true;
-            else if(mat[row][col] < x) left = mid + 1;
-            else right = mid - 1;
+        int n=mat.size();
+        int m=mat[0].size();
+        int i=0,j=m-1;
+        while(i<n && j>=0){
+            if(mat[i][j]==x) return true;
+            if(mat[i][j]>x) j--;
+            else i++;
         }
         return false;
     }
 };
+
 
 //{ Driver Code Starts.
 int main() {
