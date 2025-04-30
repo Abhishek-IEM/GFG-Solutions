@@ -4,22 +4,22 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 // User function template for C++
 class Solution {
   public:
     bool twoSum(vector<int>& arr, int target) {
         // code here
-        int n = arr.size();
-        unordered_map<int, int> mp;
-        for(int i = 0; i < n; i++)
-        {
-            int diff = target - arr[i];
-            if(mp.find(diff) != mp.end()) return true;
+        unordered_map<int,int>mp;
+        for(int i=0;i<arr.size();i++){
+            int diff=target-arr[i];
+            if(mp.find(diff)!=mp.end()) return true;
             mp[arr[i]]++;
         }
         return false;
     }
 };
+
 
 //{ Driver Code Starts.
 
