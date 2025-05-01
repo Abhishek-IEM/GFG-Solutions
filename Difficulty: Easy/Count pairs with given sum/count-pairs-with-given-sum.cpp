@@ -4,21 +4,22 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
     int countPairs(vector<int> &arr, int target) {
         // Code here
-        int n = arr.size(), count = 0;
-        unordered_map<int, int> mp;
-        for(int i = 0; i < n; i++)
-        {
-            int second = target - arr[i];
-            count += mp[second];
+        unordered_map<int,int>mp;
+        int count=0;
+        for(int i=0;i<arr.size();i++){
+            int second=target-arr[i];
+            count+=mp[second];
             mp[arr[i]]++;
         }
         return count;
     }
 };
+
 
 //{ Driver Code Starts.
 
