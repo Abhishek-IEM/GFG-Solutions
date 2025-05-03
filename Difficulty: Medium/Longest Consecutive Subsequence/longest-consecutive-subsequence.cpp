@@ -5,28 +5,33 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
 
     // Function to return length of longest subsequence of consecutive integers.
     int longestConsecutive(vector<int>& arr) {
         // Your code here
-        if (arr.empty()) return 0;
-        int n = arr.size(), count = 1, maxi = 1;
-        sort(arr.begin(), arr.end());
-        for(int i = 0; i < n - 1; i++)
-        {
-            if(arr[i + 1] - arr[i] == 1)
-            {
-                count++;
-                maxi = max(maxi, count);
-            }
-            else if(arr[i + 1] == arr[i]) continue;
-            else count = 1;
+        int freq[1000001]={0};
+        int count=0;
+        int ans=INT_MIN;
+        int maxi=-1;
+        for(int i=0;i<arr.size();i++){
+            freq[arr[i]]++;
+            maxi=max(maxi,arr[i]);
         }
-        return maxi;
+        for(int i=0;i<=maxi;i++){
+            if(freq[i]>0) count++;
+            else{
+                ans=max(ans,count);
+                count=0;
+            }
+            ans=max(ans,count);
+        }
+        return ans;
     }
 };
+
 
 //{ Driver Code Starts.
 int main() {
