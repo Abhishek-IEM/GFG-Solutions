@@ -5,48 +5,30 @@ using namespace std;
 
 // } Driver Code Ends
 
-class Solution{
-    public:
-    int findSubString(string str)
-    {
-        // Your code goes here  
-        vector<int> count(256, 0);
-        int first = 0, second = 0, len = str.size(), diff = 0;
-        //counting all the unique characters
-        while(first < str.size())
-        {
-            if(count[str[first]] == 0) diff++;
-            count[str[first]]++;
-            first++;
-        }
-        
-        for(int i = 0; i < 256; i++) count[i] = 0;
-        
-        first = 0;
-        
-        while(second < str.size())
-        {
-            //diff exists
-            while(diff && second < str.size())
-            {
-                if(count[str[second]] == 0) diff--;
-                count[str[second]]++;
-                second++;
+class Solution {
+  public:
+    int findSubString(string& str) {
+        // code here
+        set<char>s;
+        for(char c: str) s.insert(c);
+        int len=s.size();
+        int ans=INT_MAX;
+        int i=0,j=0;
+        unordered_map<char,int>mp;
+        while(j<str.size()){
+            mp[str[j]]++;
+            if(mp.size()>=len){
+                while(mp[str[i]]>1){
+                    mp[str[i]]--;
+                    i++;
+                }
+                ans=min(ans,j-i+1);
             }
-            len = min(len, second - first);
-            //diff value is 1
-            while(diff != 1)
-            {
-                len = min(len, second - first);
-                count[str[first]]--;
-                if(count[str[first]] == 0) diff++;
-                first++;
-            }
+            j++;
         }
-        return len;
+        return ans;
     }
 };
-
 
 
 //{ Driver Code Starts.
