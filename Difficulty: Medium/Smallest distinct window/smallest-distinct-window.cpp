@@ -4,6 +4,7 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution{
     public:
     int findSubString(string str)
@@ -46,8 +47,10 @@ class Solution{
     }
 };
 
+
+
 //{ Driver Code Starts.
-// Driver code
+//      Driver code
 int main() {
     int t;
     cin >> t;
@@ -57,6 +60,9 @@ int main() {
         cin >> str;
         Solution ob;
         cout << ob.findSubString(str) << endl;
+
+        cout << "~"
+             << "\n";
     }
     return 0;
 }
