@@ -4,6 +4,7 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
     int countTriplets(vector<int> &arr, int target) {
@@ -33,6 +34,7 @@ class Solution {
         return count;
     }
 };
+
 
 //{ Driver Code Starts.
 
