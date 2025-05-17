@@ -5,6 +5,7 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
     int maxWater(vector<int> &arr) {
@@ -34,9 +35,11 @@ class Solution {
             water+=rightmax-arr[i];
             else rightmax=arr[i];
         }
+        
         return water;
     }
 };
+
 
 //{ Driver Code Starts.
 int main() {
