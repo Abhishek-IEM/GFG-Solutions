@@ -4,6 +4,7 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
     int maxLen(vector<int> &arr) {
@@ -27,6 +28,7 @@ class Solution {
         return len;
     }
 };
+
 
 
 //{ Driver Code Starts.
