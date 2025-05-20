@@ -4,7 +4,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Node {
+class Node {
+  public:
     int data;
     Node *left;
     Node *right;
@@ -79,6 +80,7 @@ Node *buildTree(string str) {
 
 
 // } Driver Code Ends
+
 // User function Template for C++
 
 /*
@@ -154,6 +156,8 @@ class Solution {
         return max(timer, high);
     }
 };
+
+
 
 //{ Driver Code Starts.
 
