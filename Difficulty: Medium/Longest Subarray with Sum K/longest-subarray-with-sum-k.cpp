@@ -4,6 +4,7 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
     int longestSubarray(vector<int>& arr, int k) {
@@ -19,6 +20,7 @@ class Solution {
         return length;
     }
 };
+
 
 //{ Driver Code Starts.
 
