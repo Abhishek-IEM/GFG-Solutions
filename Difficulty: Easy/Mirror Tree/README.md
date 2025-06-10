@@ -1,4 +1,4 @@
-<h2><a href="https://www.geeksforgeeks.org/problems/mirror-tree/1">Mirror Tree</a></h2><h3>Difficulty Level : Difficulty: Easy</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">Given a binary tree, convert the binary tree to its Mirror tree. </span></p>
+<h2><a href="https://www.geeksforgeeks.org/problems/mirror-tree/1">Mirror Tree</a></h2><h3>Difficulty Level : Difficulty: Easy</h3><hr><div class="problems_problem_content__Xm_eO" bis_skin_checked="1"><p><span style="font-size: 18px;">Given a binary tree, convert the binary tree to its Mirror tree. </span></p>
 <p><span style="font-size: 18px;">Mirror of a Binary Tree T is another Binary Tree M(T) with left and right children of all non-leaf nodes interchanged.&nbsp; &nbsp; &nbsp;</span></p>
 <p><span style="font-size: 18px;"><strong>Examples:</strong></span></p>
 <pre><span style="font-size: 18px;"><strong style="font-size: 18px;">Input: </strong><span style="font-size: 18px;">root[] = [1, 2, 3, N, N, 4]
