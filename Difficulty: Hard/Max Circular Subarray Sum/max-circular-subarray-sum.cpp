@@ -1,58 +1,24 @@
-//{ Driver Code Starts
-#include <bits/stdc++.h>
-
-using namespace std;
-
-
-// } Driver Code Ends
-
 class Solution {
   public:
-    // arr: input array
-    // Function to find maximum circular subarray sum.
-    int circularSubarraySum(vector<int> &arr) {
-        int minSum = INT_MAX;
-        int maxSum = INT_MIN;
-        int s1 = 0, s2 = 0, TotalSum = 0;
-        
-        for(int i = 0; i < arr.size(); i++){
-            TotalSum += arr[i];
+    int maxCircularSum(vector<int> &arr) {
+        int maxSum = INT_MIN, minSum = INT_MAX, totalSum = 0;
+        int s1 = 0, s2 = 0, n = arr.size();
+    
+        for(int i = 0; i < n; i++) {
+            totalSum += arr[i];
+    
             s1 += arr[i];
-            s2 += arr[i];
-            if(s1 < 0) s1 = 0;
-            if(s2 > 0) s2 = 0;
             maxSum = max(maxSum, s1);
+            if(s1 < 0) s1 = 0;
+    
+            s2 += arr[i];
             minSum = min(minSum, s2);
+            if(s2 > 0) s2 = 0;
         }
-        return max(maxSum, TotalSum - minSum);
+    
+        // Handle all-negative case
+        if(maxSum < 0) return maxSum;
+    
+        return max(maxSum, totalSum - minSum);
     }
 };
-
-
-//{ Driver Code Starts.
-int main() {
-    int t;
-    cin >> t;
-    cin.ignore();
-    while (t--) {
-        vector<int> arr;
-        string input;
-
-        // Read first array
-        getline(cin, input);
-        stringstream ss(input);
-        int number;
-        while (ss >> number) {
-            arr.push_back(number);
-        }
-
-        Solution ob;
-        int res = ob.circularSubarraySum(arr);
-
-        cout << res << endl;
-        cout << "~" << endl;
-    }
-    return 0;
-}
-
-// } Driver Code Ends
