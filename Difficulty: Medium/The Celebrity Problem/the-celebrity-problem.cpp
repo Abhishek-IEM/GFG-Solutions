@@ -1,66 +1,35 @@
-//{ Driver Code Starts
-// Initial template for C++
-
-#include <bits/stdc++.h>
-using namespace std;
-
-
-// } Driver Code Ends
 // User function template for C++
 
 class Solution {
   public:
     // Function to find if there is a celebrity in the party or not.
-    int celebrity(vector<vector<int> >& mat) {
-        // code here
+    int celebrity(vector<vector<int>>& mat) {
         int n = mat.size();
         stack<int> st;
-        for(int i = n - 1; i >= 0; i--) st.push(i);
-        int first, second;
-        while(st.size() > 1)
-        {
-            first = st.top();
-            st.pop();
-            second = st.top();
-            st.pop();
-            if(mat[first][second] && !mat[second][first]) st.push(second);
-            else if(!mat[first][second] && mat[second][first]) st.push(first);
+        
+        // Push all people
+        for(int i = 0; i < n; i++) st.push(i);
+        
+        // Eliminate until one remains
+        while(st.size() > 1) {
+            int first = st.top(); st.pop();
+            int second = st.top(); st.pop();
+            
+            if(mat[first][second] == 1) st.push(second);  // first knows second → first not celeb
+            else st.push(first);  // first doesn't know second → second not celeb
         }
         
         if(st.empty()) return -1;
         
-        int num = st.top();
-        st.pop();
+        int candidate = st.top();
         
-        int row = 0, col = 0;
-        for(int i = 0; i < n; i++)
-        {
-            row += mat[num][i];
-            col += mat[i][num];
-        }
-        
-        return row == 0 && col == n - 1 ? num : -1;
-    }
-};
-
-//{ Driver Code Starts.
-
-int main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        vector<vector<int> > M(n, vector<int>(n, 0));
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                cin >> M[i][j];
+        // Verify candidate
+        for(int i = 0; i < n; i++) {
+            if(i != candidate) {
+                if(mat[candidate][i] == 1 || mat[i][candidate] == 0) return -1;
             }
         }
-        Solution ob;
-        cout << ob.celebrity(M) << endl;
-        cout << "~" << endl;
+        
+        return candidate;
     }
-}
-
-// } Driver Code Ends
+};
